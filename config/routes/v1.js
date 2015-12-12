@@ -2,7 +2,7 @@
 var status = require('hapi-status');
 /*Custom packages*/
 var info = require('./info.json');
-var Controllers = require('../Controllers');
+var Controllers = require('../controllers');
 module.exports= 
  [
 	{
