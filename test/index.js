@@ -31,7 +31,38 @@ describe('Diloo url testing',function(){
 			})
 		})
 	});
-	describe('obteniendo planes',function(){
+	describe('Creando una empresa',function(){
+		it('POST',function(done){
+			Request({
+				url: base + '/company/create'
+				,method:'POST'
+				,headers :headers
+				,qs : {
+					authToken:'123456abcdef'
+				}
+				,body:JSON.stringify({
+					name:'dilooEmpresa'
+					,categoryId:1
+					,isConcierge:false
+					,ruc:'1047368088'
+					,ownerName:'miguel aliaga'
+					,ownerEmail:'maliaga.pantoja@gmail.com'
+					,other:'josejose'
+				})
+			},function(err,incoming,body){
+				if(err){
+					done(err);
+				}else{
+					var actual   = JSON.parse(body);
+					var expected = Expect.api.statusCode;
+					Assert.equal(actual.statusCode,expected,'status code validation');
+					done();
+				}
+				
+			})
+		})
+	});	
+	/*describe('obteniendo planes',function(){
 		it('get',function(done){
 			Request({
 				url: base+'/plans'
@@ -70,5 +101,5 @@ describe('Diloo url testing',function(){
 				
 			})
 		})
-	})	
+	})	*/
 })

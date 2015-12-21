@@ -13,6 +13,12 @@ if(process.env.ENV === 'production'){
 	passwd =  '1234';
 	port   =  5432;
 }
+
 module.exports={
-	"postgres":"postgres://"+user+":"+passwd+"@"+host+"/"+db
+	"postgres":"postgres://"+user+":"+passwd+"@"+host+"/"+db,
+	Mail:{
+		service :'Gmail',
+		user    : 'no-reply@dilooapp.com',
+		pass    : 'noreply_147'
+	}
 }

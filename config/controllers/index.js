@@ -1,8 +1,10 @@
-var Category = require('./Category');
-var Plan     = require('./Plan');
+/*var Category = require('./Category');
+var Plan     = require('./Plan');*/
 var Company  = require('./Company');
+var Auth     = require('./Auth');
 module.exports={
-	category  :  Category
-	,plan     :  Plan
-	,company  :  Company
+	//Category  :  Category,
+	//Clan     :  Plan,
+	Company  :  Company,
+	Auth     :  Auth
 }

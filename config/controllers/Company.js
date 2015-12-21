@@ -1,10 +1,12 @@
 /*NPM modules*/
-var Client = require('pg-native');
+//var Client = require('pg-native');
 var status = require('hapi-status');
+var Models = require('../Models');
+var Services = require('../Services');
 /*instances*/
-var client = new Client();
+//var client = new Client();
 module.exports={
-	all:function(req,reply){
+	/*all:function(req,reply){
 		req.pg.client('select * from get_companies_sorted_by_category_name',function (pgERR,pgRows) {
 			if(pgERR){
 				console.log('e1')
@@ -29,5 +31,36 @@ module.exports={
 			}
 			client.end();
 		} )		
+	},*/
+	create: function (req,reply){
+		var Company = Models.Company; 
+		Company(req.payload).create(function (err,value){
+			if(err === null ){
+				req.isAdmin(function (mongoErr,mongoReply){
+					if(mongoErr){
+						status.internalServerError(reply,mongoErr)
+					}else if(mongoReply !== 0){
+						var params = {
+							to    :  value.ownerEmail,
+							code  :  Services.GenCode()
+						}
+						Services.Mailing(params,function(servErr,servInfo){
+							if( !servErr){
+								status.ok(reply)
+							}else{
+								status.internalServerError(reply,servErr)
+							}
+						});
+						
+					}else{
+						status.forbidden(reply);
+					}
+				})
+			}else{
+				//console.log(err)
+				return status.notAcceptable(reply,err);
+
+			}
+		})
 	}
 }
