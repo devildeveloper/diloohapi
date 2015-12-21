@@ -8,6 +8,7 @@ var Controllers = require('../Controllers');
 var api = function(path){
 	return '/api/v1'+ path;
 }
+var Controllers = require('../controllers');
 module.exports= 
 [
 	{
@@ -24,7 +25,7 @@ module.exports=
 
 	}
 	//Auth
-	/*,{
+	,{
 		method  : 'POST'
 		,path   : api('/auth/employee')
 		,config : {
@@ -43,7 +44,7 @@ module.exports=
 			,notes       : 'return confirmation of company created or error list'
 			,handler     : Controllers.Auth.mobile
 		}
-	}	*/
+	}	
 	//Company
 	,{
 		method  : 'POST'
@@ -55,7 +56,7 @@ module.exports=
 			,handler     : Controllers.Company.create
 		}
 	}
-	/*,{
+	,{
 		method:'GET'
 		,path:'/api/v1/company/category'
 		,config:{
@@ -84,5 +85,5 @@ module.exports=
 			,notes:"return all plans"
 			,handler:Controllers.plan.all
 		}
-	}	*/	
+	}		
 ]
